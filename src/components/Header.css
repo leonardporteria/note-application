@@ -1,0 +1,13 @@
+@import '../root.css';
+
+.Header {
+  display: flex;
+}
+
+.Header > h1 {
+  color: var(--white);
+}
+
+.Header > button {
+  color: var(--dark);
+}
