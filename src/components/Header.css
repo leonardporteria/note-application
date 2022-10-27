@@ -1,13 +1,55 @@
 @import '../root.css';
 
 .Header {
+  width: 90%;
+  margin: auto;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Header > h1 {
+  font-family: var(--poppins);
+  font-size: 2rem;
+  font-weight: 800;
   color: var(--white);
 }
 
-.Header > button {
-  color: var(--dark);
+.Header .buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.Header .buttons .add-note {
+  cursor: pointer;
+  width: 9rem;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--blue);
+  font-family: var(--poppins);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--light);
+}
+
+.Header .buttons .add-note:hover {
+  box-shadow: 0px 3px 10px 5px var(--blue-opaque);
+}
+
+.Header .buttons .filter {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--orange);
+  font-family: var(--poppins);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--light);
+}
+
+.Header .buttons .filter:hover {
+  box-shadow: 0px 3px 10px 5px var(--orange-opaque);
 }
