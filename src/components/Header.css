@@ -26,7 +26,7 @@
   height: 3rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: var(--blue);
+  background-color: var(--blue-p);
   font-family: var(--poppins);
   font-size: 1rem;
   font-weight: 500;
@@ -43,7 +43,7 @@
   height: 3rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: var(--orange);
+  background-color: var(--orange-p);
   font-family: var(--poppins);
   font-size: 1rem;
   font-weight: 500;

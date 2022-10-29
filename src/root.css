@@ -7,7 +7,24 @@
   --white: #ffffff;
   --black: #000000;
 
-  /* ACCENT COLORS */
+  /* DARK MODE COLORS */
+  --gray: gray;
+  --dark-gray-1: gray;
+  --dark-gray-2: gray;
+  --dark-gray-3: gray;
+  --light-gray-1: gray;
+  --light-gray-2: gray;
+  --light-gray-3: gray;
+
+  /* PRIMARY COLORS */
+  --red-p: #c4243e;
+  --green-p: #299e29;
+  --blue-p: #2a2ae4;
+  --cyan-p: #1cc0c0;
+  --yellow-p: #e0e01f;
+  --orange-p: #df9e25;
+
+  /* NOTE COLORS */
   --blue: #4242ff;
   --yellow: #ecec1c;
   --pink: #d82f8c;
@@ -20,6 +37,10 @@
   --orange-opaque: #e7a9367a;
   --light-opaque: #f5f5f538;
   --dark-opaque: #1b1b1b7a;
+  --red-opaque: #c4243e7a;
+  --green-opaque: #299e297a;
+  --cyan-opaque: #1cc0c07a;
+  --yellow-opaque: #e0e01f7a;
 
   /* FONTS */
   --poppins: 'Poppins', sans-serif;

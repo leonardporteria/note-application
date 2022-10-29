@@ -1,8 +1,7 @@
-import Textarea from './Textarea';
 const Main = () => {
   return (
     <>
-      <Textarea />
+      <div>lol</div>
     </>
   );
 };

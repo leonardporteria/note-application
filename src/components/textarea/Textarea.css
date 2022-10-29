@@ -1,0 +1,84 @@
+@import '../../root.css';
+
+.Textarea {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--dark-opaque);
+}
+
+.Textarea .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 60%;
+  height: 40%;
+  padding: 2rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: var(--dark);
+  box-shadow: 0px 3px 15px 3px var(--light-opaque);
+}
+
+.Textarea .container > input {
+  height: 1rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.Textarea .container > textarea {
+  resize: none;
+  height: 80%;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.Textarea .container .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Textarea .container .buttons button {
+  cursor: pointer;
+  width: 9rem;
+  height: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: var(--poppins);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--light);
+}
+
+/* TEXT AREA BUTTONS */
+.Textarea .container .buttons .button-color {
+  background-color: var(--orange-p);
+}
+.Textarea .container .buttons .button-color:hover {
+  box-shadow: 1px 2px 5px 3px var(--orange-opaque);
+}
+.Textarea .container .buttons .button-label {
+  background-color: var(--cyan-p);
+}
+.Textarea .container .buttons .button-label:hover {
+  box-shadow: 1px 2px 5px 3px var(--cyan-opaque);
+}
+.Textarea .container .buttons .button-cancel {
+  background-color: var(--red-p);
+}
+.Textarea .container .buttons .button-cancel:hover {
+  box-shadow: 1px 2px 5px 3px var(--red-opaque);
+}
+.Textarea .container .buttons .button-add {
+  background-color: var(--green-p);
+}
+.Textarea .container .buttons .button-add:hover {
+  box-shadow: 1px 2px 5px 3px var(--green-opaque);
+}

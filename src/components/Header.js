@@ -1,5 +1,5 @@
 import './Header.css';
-import Textarea from './Textarea';
+import Textarea from './textarea/Textarea';
 
 import { useState } from 'react';
 
@@ -23,7 +23,7 @@ const Header = () => {
         </div>
       </div>
 
-      {isCreating && <Textarea onCreatingChange={setIsCreating} />}
+      {isCreating && <Textarea onCreating={setIsCreating} />}
     </>
   );
 };
