@@ -25,21 +25,48 @@
   box-shadow: 0px 3px 15px 3px var(--light-opaque);
 }
 
+/* INPUT TITLE */
 .Textarea .container > input {
   height: 1rem;
   padding: 1rem;
   border: none;
   border-radius: 0.5rem;
+  background-color: var(--dark-gray-3);
+  font-family: var(--poppins);
+  color: var(--light-gray-3);
 }
 
+.Textarea .container > input::placeholder {
+  font-family: var(--poppins);
+  color: var(--light-gray-3);
+}
+
+.Textarea .container > input:focus {
+  outline: none;
+}
+
+/* INPUT NOTE */
 .Textarea .container > textarea {
   resize: none;
   height: 80%;
   padding: 1rem;
   border: none;
   border-radius: 0.5rem;
+  background-color: var(--dark-gray-3);
+  font-family: var(--poppins);
+  color: var(--light-gray-3);
 }
 
+.Textarea .container > textarea::placeholder {
+  font-family: var(--poppins);
+  color: var(--light-gray-3);
+}
+
+.Textarea .container > textarea:focus {
+  outline: none;
+}
+
+/* TEXT AREA BUTTONS */
 .Textarea .container .buttons {
   display: flex;
   justify-content: space-between;
@@ -57,7 +84,6 @@
   color: var(--light);
 }
 
-/* TEXT AREA BUTTONS */
 .Textarea .container .buttons .button-color {
   background-color: var(--orange-p);
 }

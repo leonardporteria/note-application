@@ -1,6 +1,13 @@
 import './Textarea.css';
+import Color from './Color';
+import Label from './Label';
+
+import { useState } from 'react';
 
 const Textarea = ({ onCreating }) => {
+  const [showColor, setShowColor] = useState(false);
+  const [showLabel, setShowLabel] = useState(false);
+
   const handleChange = () => {
     console.log('change');
   };
@@ -16,9 +23,13 @@ const Textarea = ({ onCreating }) => {
 
   const handleChangeColor = () => {
     console.log('change color');
+    setShowColor(!showColor);
+    setShowLabel(false);
   };
   const handleAddLabel = () => {
     console.log('add label');
+    setShowLabel(!showLabel);
+    setShowColor(false);
   };
   const handleAddNote = () => {
     console.log('add note');
@@ -49,6 +60,9 @@ const Textarea = ({ onCreating }) => {
             add
           </button>
         </div>
+        {/* CONDITIONAL RENDERING FOR COLOR AND LABEL */}
+        {showColor && <Color />}
+        {showLabel && <Label />}
       </div>
     </div>
   );
