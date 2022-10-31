@@ -1,0 +1,41 @@
+@import '../../root.css';
+
+.Label {
+  position: absolute;
+  bottom: -6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 70%;
+  height: 5rem;
+  border-radius: 1rem;
+  background-color: var(--dark-gray-3);
+}
+
+.Label .label-input {
+  outline: none;
+  height: 1rem;
+  width: 100%;
+  padding: 1rem;
+  margin: 0 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--dark-gray-2);
+  font-family: var(--poppins);
+  color: var(--light-gray-3);
+}
+
+.Label .label-add {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--green-p);
+  font-family: var(--poppins);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--light);
+}

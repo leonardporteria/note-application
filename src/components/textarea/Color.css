@@ -1,0 +1,48 @@
+@import '../../root.css';
+
+.Color {
+  position: absolute;
+  bottom: -6rem;
+  margin: auto;
+  width: 70%;
+  height: 5rem;
+  border-radius: 1rem;
+  background-color: var(--dark-gray-3);
+}
+
+.Color .buttons {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.Color .buttons > div {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.Color .buttons .blue-btn {
+  background-color: var(--blue);
+}
+
+.Color .buttons .yellow-btn {
+  background-color: var(--yellow);
+}
+
+.Color .buttons .pink-btn {
+  background-color: var(--pink);
+}
+
+.Color .buttons .green-btn {
+  background-color: var(--green);
+}
+
+.Color .buttons .teal-btn {
+  background-color: var(--teal);
+}
+
+.Color .buttons .orange-btn {
+  background-color: var(--orange);
+}
