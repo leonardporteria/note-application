@@ -1,14 +1,40 @@
 import './Label.css';
+import { useState } from 'react';
 
-const Label = () => {
+const Label = ({ setLabel, label }) => {
+  let [labelValue, setLabelValue] = useState('');
+
+  const handleLabel = (e) => {
+    console.log(e.target.value);
+    setLabelValue(e.target.value);
+  };
+
+  const handleAddLabel = () => {
+    setLabel(labelValue);
+  };
+
+  const handleClearLabel = () => {
+    setLabel('');
+  };
+
   return (
     <div className='Label'>
       <input
         className='label-input'
         type='text'
-        placeholder='Enter Label [12char max]'
+        placeholder={
+          label === '' ? 'Enter Label [12char max]' : `Label: ${label}`
+        }
+        maxLength='12'
+        onChange={handleLabel}
       />
-      <button className='label-add'>add</button>
+
+      <button className='label-add' onClick={handleAddLabel}>
+        set
+      </button>
+      <button className='label-clear' onClick={handleClearLabel}>
+        clear
+      </button>
     </div>
   );
 };

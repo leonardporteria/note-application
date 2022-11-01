@@ -28,12 +28,26 @@
 
 .Label .label-add {
   cursor: pointer;
-  width: 3rem;
+  width: 4rem;
   height: 3rem;
   margin-right: 1rem;
   border: none;
   border-radius: 0.5rem;
   background-color: var(--green-p);
+  font-family: var(--poppins);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--light);
+}
+
+.Label .label-clear {
+  cursor: pointer;
+  width: 4rem;
+  height: 3rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--red-p);
   font-family: var(--poppins);
   font-size: 0.75rem;
   font-weight: 500;
