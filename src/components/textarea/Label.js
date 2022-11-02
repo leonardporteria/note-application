@@ -1,7 +1,7 @@
 import './Label.css';
 import { useState } from 'react';
 
-const Label = ({ setLabel, label }) => {
+const Label = ({ setLabel, label, setShowLabel }) => {
   let [labelValue, setLabelValue] = useState('');
 
   const handleLabel = (e) => {
@@ -29,10 +29,22 @@ const Label = ({ setLabel, label }) => {
         onChange={handleLabel}
       />
 
-      <button className='label-add' onClick={handleAddLabel}>
+      <button
+        className='label-add'
+        onClick={() => {
+          setShowLabel(false);
+          handleAddLabel();
+        }}
+      >
         set
       </button>
-      <button className='label-clear' onClick={handleClearLabel}>
+      <button
+        className='label-clear'
+        onClick={() => {
+          setShowLabel(false);
+          handleClearLabel();
+        }}
+      >
         clear
       </button>
     </div>

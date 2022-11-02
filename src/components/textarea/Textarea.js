@@ -14,12 +14,37 @@ const Textarea = ({ onCreating }) => {
   const [label, setLabel] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [canAdd, setCanAdd] = useState(false);
+  const usedTitles = JSON.parse(localStorage.getItem('note-app')) || [];
 
   const handleTitle = (e) => {
-    setTitle(e.target.value);
+    usedTitles.forEach((usedTitle) => {
+      const trimmedTitle = e.target.value.trim();
+      if (usedTitle.title === trimmedTitle) {
+        console.log('same title');
+        setCanAdd(false);
+        return;
+      } else if (trimmedTitle === '') {
+        console.log('no lenght');
+        setCanAdd(false);
+        return;
+      } else {
+        console.log('can add');
+        setTitle(trimmedTitle);
+        setCanAdd(true);
+        return;
+      }
+    });
   };
   const handleBody = (e) => {
-    setBody(e.target.value);
+    if (e.target.value.trim() === '') {
+      console.log('no lenght');
+      setCanAdd(false);
+    } else {
+      console.log('can add');
+      setBody(e.target.value);
+      setCanAdd(true);
+    }
   };
 
   const handleChangeColor = () => {
@@ -28,6 +53,7 @@ const Textarea = ({ onCreating }) => {
     setShowLabel(false);
     console.log(color);
   };
+
   const handleAddLabel = () => {
     console.log('add label');
     setShowLabel(!showLabel);
@@ -39,10 +65,23 @@ const Textarea = ({ onCreating }) => {
     console.log('cancel add note');
     onCreating(false);
   };
+
   const handleAddNote = () => {
-    console.log('add note');
-    console.log(color, label);
-    console.log(title, body);
+    // base condition
+    if (!canAdd) return;
+
+    const oldObject = JSON.parse(localStorage.getItem('note-app')) || [];
+    const noteObject = {
+      color: color,
+      label: label,
+      title: title,
+      body: body,
+    };
+    oldObject.push(noteObject);
+    localStorage.setItem('note-app', JSON.stringify(oldObject));
+
+    // disable textare
+    onCreating(false);
   };
 
   return (
@@ -76,7 +115,13 @@ const Textarea = ({ onCreating }) => {
         </div>
         {/* CONDITIONAL RENDERING FOR COLOR AND LABEL */}
         {showColor && <Color setColor={setColor} />}
-        {showLabel && <Label setLabel={setLabel} label={label} />}
+        {showLabel && (
+          <Label
+            setLabel={setLabel}
+            label={label}
+            setShowLabel={setShowLabel}
+          />
+        )}
       </div>
     </div>
   );
