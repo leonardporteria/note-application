@@ -114,7 +114,7 @@ const Textarea = ({ onCreating }) => {
           </button>
         </div>
         {/* CONDITIONAL RENDERING FOR COLOR AND LABEL */}
-        {showColor && <Color setColor={setColor} />}
+        {showColor && <Color setColor={setColor} setShowColor={setShowColor} />}
         {showLabel && (
           <Label
             setLabel={setLabel}

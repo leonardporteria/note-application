@@ -26,23 +26,41 @@
 .Color .buttons .blue-btn {
   background-color: var(--blue);
 }
+.Color .buttons .blue-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--blue-opaque);
+}
 
 .Color .buttons .yellow-btn {
   background-color: var(--yellow);
+}
+.Color .buttons .yellow-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--yellow-opaque);
 }
 
 .Color .buttons .pink-btn {
   background-color: var(--pink);
 }
+.Color .buttons .pink-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--pink-opaque);
+}
 
 .Color .buttons .green-btn {
   background-color: var(--green);
+}
+.Color .buttons .green-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--green-opaque);
 }
 
 .Color .buttons .teal-btn {
   background-color: var(--teal);
 }
+.Color .buttons .teal-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--teal-opaque);
+}
 
 .Color .buttons .orange-btn {
   background-color: var(--orange);
+}
+.Color .buttons .orange-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--orange-opaque);
 }

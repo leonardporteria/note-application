@@ -33,11 +33,12 @@
   --orange: #e7a936;
 
   /* HOVER COLORS */
-  --blue-opaque: #4242ff7a;
-  --orange-opaque: #e7a9367a;
   --light-opaque: #f5f5f51f;
   --dark-opaque: #1b1b1b7a;
+  --blue-opaque: #4242ff7a;
+  --orange-opaque: #e7a9367a;
   --red-opaque: #c4243e7a;
+  --pink-opaque: #d82f8c7a;
   --green-opaque: #299e297a;
   --cyan-opaque: #1cc0c07a;
   --yellow-opaque: #e0e01f7a;
