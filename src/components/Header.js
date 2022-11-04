@@ -1,6 +1,6 @@
 import './Header.css';
 import Textarea from './textarea/Textarea';
-import Renderer from './Renderer';
+import Renderer from './renderer/Renderer';
 
 import { useState } from 'react';
 

@@ -1,3 +1,4 @@
+import NoteBlock from './NoteBlock';
 import { useState, useEffect } from 'react';
 
 const Renderer = () => {
@@ -10,10 +11,16 @@ const Renderer = () => {
   };
 
   useEffect(() => {
-    getNotes();
+    setNotes(getNotes);
   }, []);
 
-  return <div className='Content'>test</div>;
+  return (
+    <div className='Content'>
+      {notes.map((note, index) => (
+        <NoteBlock key={index} index={index} note={note} />
+      ))}
+    </div>
+  );
 };
 
 export default Renderer;
