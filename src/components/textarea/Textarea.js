@@ -8,9 +8,10 @@ const Textarea = ({ onCreating }) => {
   // CONDITIONAL RENDERING BOOLEANS
   const [showColor, setShowColor] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
+  const [showHelper, setShowHelper] = useState(false);
 
   // COMPONENTS VARIABLES
-  const [color, setColor] = useState('dark');
+  const [color, setColor] = useState('blue');
   const [label, setLabel] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -18,21 +19,22 @@ const Textarea = ({ onCreating }) => {
   const usedTitles = JSON.parse(localStorage.getItem('note-app')) || [];
 
   const handleTitle = (e) => {
+    const trimmedTitle = e.target.value.trim();
+
+    if (Object.keys(usedTitles).length === 0) setTitle(trimmedTitle);
+
     usedTitles.forEach((usedTitle) => {
-      const trimmedTitle = e.target.value.trim();
+      console.log(trimmedTitle);
       if (usedTitle.title === trimmedTitle) {
         console.log('same title');
         setCanAdd(false);
-        return;
       } else if (trimmedTitle === '') {
         console.log('no lenght');
         setCanAdd(false);
-        return;
       } else {
         console.log('can add');
         setTitle(trimmedTitle);
         setCanAdd(true);
-        return;
       }
     });
   };
@@ -53,19 +55,16 @@ const Textarea = ({ onCreating }) => {
     setShowLabel(false);
     console.log(color);
   };
-
   const handleAddLabel = () => {
     console.log('add label');
     setShowLabel(!showLabel);
     setShowColor(false);
     console.log(label);
   };
-
   const handleCancelCreating = () => {
     console.log('cancel add note');
     onCreating(false);
   };
-
   const handleAddNote = () => {
     // base condition
     if (!canAdd) return;
@@ -99,6 +98,7 @@ const Textarea = ({ onCreating }) => {
           rows='10'
           onChange={handleBody}
         ></textarea>
+        {showHelper && <div className='helper'> s</div>}
         <div className='buttons'>
           <button className='button-color' onClick={handleChangeColor}>
             color
@@ -114,6 +114,7 @@ const Textarea = ({ onCreating }) => {
           </button>
         </div>
         {/* CONDITIONAL RENDERING FOR COLOR AND LABEL */}
+
         {showColor && <Color setColor={setColor} setShowColor={setShowColor} />}
         {showLabel && (
           <Label

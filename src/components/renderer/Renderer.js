@@ -1,3 +1,4 @@
+import './Renderer.css';
 import NoteBlock from './NoteBlock';
 import { useState, useEffect } from 'react';
 
