@@ -17,7 +17,7 @@
 }
 
 .note-label {
-  color: var(--dark-gray-3);
+  color: var(--light);
   font-style: italic;
   text-align: center;
   width: 100%;

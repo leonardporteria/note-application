@@ -3,7 +3,9 @@ import NoteBlock from './NoteBlock';
 import { useState, useEffect } from 'react';
 
 const Renderer = () => {
+  const noteObject = JSON.parse(localStorage.getItem('note-app')) || [];
   const [notes, setNotes] = useState([]);
+  const [sortedNotes, setSortedNotes] = useState([]);
 
   const getNotes = () => {
     const oldObject = JSON.parse(localStorage.getItem('note-app')) || [];

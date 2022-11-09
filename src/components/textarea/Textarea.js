@@ -8,22 +8,21 @@ const Textarea = ({ onCreating }) => {
   // CONDITIONAL RENDERING BOOLEANS
   const [showColor, setShowColor] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
-  const [showHelper, setShowHelper] = useState(false);
 
   // COMPONENTS VARIABLES
-  const [color, setColor] = useState('blue');
+  const [color, setColor] = useState('no-color');
   const [label, setLabel] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [canAdd, setCanAdd] = useState(false);
-  const usedTitles = JSON.parse(localStorage.getItem('note-app')) || [];
+  const noteObject = JSON.parse(localStorage.getItem('note-app')) || [];
 
   const handleTitle = (e) => {
     const trimmedTitle = e.target.value.trim();
 
-    if (Object.keys(usedTitles).length === 0) setTitle(trimmedTitle);
+    if (Object.keys(noteObject).length === 0) setTitle(trimmedTitle);
 
-    usedTitles.forEach((usedTitle) => {
+    noteObject.forEach((usedTitle) => {
       console.log(trimmedTitle);
       if (usedTitle.title === trimmedTitle) {
         console.log('same title');
@@ -70,13 +69,13 @@ const Textarea = ({ onCreating }) => {
     if (!canAdd) return;
 
     const oldObject = JSON.parse(localStorage.getItem('note-app')) || [];
-    const noteObject = {
+    const note = {
       color: color,
       label: label,
       title: title,
       body: body,
     };
-    oldObject.push(noteObject);
+    oldObject.push(note);
     localStorage.setItem('note-app', JSON.stringify(oldObject));
 
     // disable textare
@@ -98,7 +97,9 @@ const Textarea = ({ onCreating }) => {
           rows='10'
           onChange={handleBody}
         ></textarea>
-        {showHelper && <div className='helper'> s</div>}
+        <div className='helper'>{`label: ${
+          label === '' ? 'no label' : label
+        } color: ${color}`}</div>
         <div className='buttons'>
           <button className='button-color' onClick={handleChangeColor}>
             color
