@@ -1,15 +1,21 @@
 import './Header.css';
 import Textarea from './textarea/Textarea';
 import Renderer from './renderer/Renderer';
+import Filters from './Filters';
 
 import { useState } from 'react';
 
 const Header = () => {
-  const [isCreating, setIsCreating] = useState(false);
+  const [showTextbox, setshowTextbox] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleAddNote = () => {
     console.log('CREATING NEW NOTE');
-    setIsCreating(!isCreating);
+    setshowTextbox(!showTextbox);
+  };
+
+  const handleFilters = () => {
+    setShowFilters(!showFilters);
   };
 
   return (
@@ -17,14 +23,17 @@ const Header = () => {
       <div className='Header'>
         <h1>Note Application</h1>
         <div className='buttons'>
-          <button className='filter'>⛬</button>
+          <button className='filter' onClick={handleFilters}>
+            ⛬
+          </button>
           <button className='add-note' onClick={handleAddNote}>
             + Add Note
           </button>
         </div>
       </div>
 
-      {isCreating && <Textarea onCreating={setIsCreating} />}
+      {showTextbox && <Textarea onCreating={setshowTextbox} />}
+      {showFilters && <Filters onCreating={setShowFilters} />}
       <Renderer />
     </>
   );
