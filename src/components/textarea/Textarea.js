@@ -4,7 +4,7 @@ import Label from './Label';
 
 import { useState } from 'react';
 
-const Textarea = ({ onCreating }) => {
+const Textarea = ({ onCreating, render }) => {
   // CONDITIONAL RENDERING BOOLEANS
   const [showColor, setShowColor] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
@@ -80,6 +80,8 @@ const Textarea = ({ onCreating }) => {
 
     // disable textare
     onCreating(false);
+    render(false);
+    render(true);
   };
 
   return (
