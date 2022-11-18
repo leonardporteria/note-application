@@ -5,7 +5,6 @@ const Label = ({ setLabel, label, setShowLabel }) => {
   let [labelValue, setLabelValue] = useState('');
 
   const handleLabel = (e) => {
-    console.log(e.target.value);
     setLabelValue(e.target.value);
   };
 

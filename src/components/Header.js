@@ -8,7 +8,9 @@ import { useState } from 'react';
 const Header = () => {
   const [showTextbox, setshowTextbox] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [render, setRender] = useState(true);
+  const [notes, setNotes] = useState(
+    JSON.parse(localStorage.getItem('note-app')) || []
+  );
 
   const handleAddNote = () => {
     console.log('CREATING NEW NOTE');
@@ -34,12 +36,10 @@ const Header = () => {
       </div>
 
       {showTextbox && (
-        <Textarea onCreating={setshowTextbox} render={setRender} />
+        <Textarea onCreating={setshowTextbox} setNotes={setNotes} />
       )}
-      {showFilters && (
-        <Filters onCreating={setShowFilters} render={setRender} />
-      )}
-      {render && <Renderer />}
+      {showFilters && <Filters onCreating={setShowFilters} />}
+      <Renderer notes={notes} setNotes={setNotes} />
     </>
   );
 };

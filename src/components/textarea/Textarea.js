@@ -4,7 +4,7 @@ import Label from './Label';
 
 import { useState } from 'react';
 
-const Textarea = ({ onCreating, render }) => {
+const Textarea = ({ onCreating, setNotes }) => {
   // CONDITIONAL RENDERING BOOLEANS
   const [showColor, setShowColor] = useState(false);
   const [showLabel, setShowLabel] = useState(false);
@@ -23,15 +23,11 @@ const Textarea = ({ onCreating, render }) => {
     if (Object.keys(noteObject).length === 0) setTitle(trimmedTitle);
 
     noteObject.forEach((usedTitle) => {
-      console.log(trimmedTitle);
       if (usedTitle.title === trimmedTitle) {
-        console.log('same title');
         setCanAdd(false);
       } else if (trimmedTitle === '') {
-        console.log('no lenght');
         setCanAdd(false);
       } else {
-        console.log('can add');
         setTitle(trimmedTitle);
         setCanAdd(true);
       }
@@ -39,10 +35,8 @@ const Textarea = ({ onCreating, render }) => {
   };
   const handleBody = (e) => {
     if (e.target.value.trim() === '') {
-      console.log('no lenght');
       setCanAdd(false);
     } else {
-      console.log('can add');
       setBody(e.target.value);
       setCanAdd(true);
     }
@@ -78,10 +72,12 @@ const Textarea = ({ onCreating, render }) => {
     oldObject.push(note);
     localStorage.setItem('note-app', JSON.stringify(oldObject));
 
+    // get new notes
+    const newObject = JSON.parse(localStorage.getItem('note-app'));
+
     // disable textare
     onCreating(false);
-    render(false);
-    render(true);
+    setNotes(newObject);
   };
 
   return (
