@@ -38,7 +38,9 @@ const Header = () => {
       {showTextbox && (
         <Textarea onCreating={setshowTextbox} setNotes={setNotes} />
       )}
-      {showFilters && <Filters onCreating={setShowFilters} />}
+      {showFilters && (
+        <Filters onCreating={setShowFilters} setNotes={setNotes} />
+      )}
       <Renderer notes={notes} setNotes={setNotes} />
     </>
   );
