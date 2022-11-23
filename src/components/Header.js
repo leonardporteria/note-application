@@ -12,6 +12,10 @@ const Header = () => {
     JSON.parse(localStorage.getItem('note-app')) || []
   );
 
+  // FILTERS CHANGES MEMORY
+  const [filterSort, setFilterSort] = useState('date');
+  const [filterShow, setFilterShow] = useState(['all']);
+
   const handleAddNote = () => {
     console.log('CREATING NEW NOTE');
     setshowTextbox(!showTextbox);
@@ -43,6 +47,10 @@ const Header = () => {
           onCreating={setShowFilters}
           notes={notes}
           setNotes={setNotes}
+          filterSort={filterSort}
+          setFilterSort={setFilterSort}
+          filterShow={filterShow}
+          setFilterShow={setFilterShow}
         />
       )}
       <Renderer notes={notes} setNotes={setNotes} />

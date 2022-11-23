@@ -1,11 +1,16 @@
 import './Filters.css';
 import { useState } from 'react';
 
-const Filters = ({ onCreating, notes, setNotes }) => {
+const Filters = ({
+  onCreating,
+  notes,
+  setNotes,
+  filterSort,
+  setFilterSort,
+  filterShow,
+  setFilterShow,
+}) => {
   const [filteredNotes, setFilteredNotes] = useState(notes);
-  const [filterSort, setFilterSort] = useState('date');
-  const [filterShow, setFilterShow] = useState(['all']);
-  const [isAllChecked, setIsAllChecked] = useState(true);
 
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   const dynamicSort = (property, sortOrder) => {
@@ -19,6 +24,20 @@ const Filters = ({ onCreating, notes, setNotes }) => {
       return result * sortOrder;
     };
   };
+  //https://stackoverflow.com/questions/3954438/how-to-remove-item-from-array-by-value
+  function removeArray(arr) {
+    let what,
+      a = arguments,
+      L = a.length,
+      ax;
+    while (L > 1 && arr.length) {
+      what = a[--L];
+      while ((ax = arr.indexOf(what)) !== -1) {
+        arr.splice(ax, 1);
+      }
+    }
+    return arr;
+  }
 
   const handleChangeSort = (e) => {
     const selected = e.target.value;
@@ -40,20 +59,27 @@ const Filters = ({ onCreating, notes, setNotes }) => {
   };
 
   const handleChangeShow = (e) => {
-    console.log(e.target.value);
-    console.log(notes);
-    setFilterShow(e.target.value);
+    // check if all is checked, if checked, pop, else clear others
     // if e.value exist pop, else push
-  };
+    const selected = e.target.value;
+    let oldFilterArray = filterShow;
 
-  const handleCheckedCheckbox = (e) => {
-    console.log(e.target);
-    if (e.target.checked) console.log('chk');
+    if (selected === 'all') {
+      filterShow.includes('all')
+        ? console.log('has all')
+        : (filterShow = ['all']);
+    } else {
+      removeArray(filterShow, 'all');
+      console.log(filterShow);
+    }
+
+    filterShow.push('test');
+    console.log(filterShow);
+    console.log(filterShow);
   };
 
   const handleCloseFilters = () => {
     onCreating(false);
-    console.log(filterSort, filterShow);
   };
 
   return (
@@ -75,31 +101,41 @@ const Filters = ({ onCreating, notes, setNotes }) => {
             defaultChecked={filterSort === 'titleAsc'}
           />
           <label htmlFor='Filter-Sort'> Title (Asc)</label>
-          <input type='radio' value='titleDesc' name='Filter-Sort' />
+          <input
+            type='radio'
+            value='titleDesc'
+            name='Filter-Sort'
+            defaultChecked={filterSort === 'titleDesc'}
+          />
           <label htmlFor='Filter-Sort'> Title (Desc)</label>
-          <input type='radio' value='color' name='Filter-Sort' />
+          <input
+            type='radio'
+            value='color'
+            name='Filter-Sort'
+            defaultChecked={filterSort === 'color'}
+          />
           <label htmlFor='Filter-Sort'>Color</label>
-          <input type='radio' value='labelAsc' name='Filter-Sort' />
+          <input
+            type='radio'
+            value='labelAsc'
+            name='Filter-Sort'
+            defaultChecked={filterSort === 'labelAsc'}
+          />
           <label htmlFor='Filter-Sort'>Label (Asc)</label>
-          <input type='radio' value='labelDesc' name='Filter-Sort' />
+          <input
+            type='radio'
+            value='labelDesc'
+            name='Filter-Sort'
+            defaultChecked={filterSort === 'labelDesc'}
+          />
           <label htmlFor='Filter-Sort'>Label (Desc)</label>
         </div>
 
         <div className='filter-show' onChange={handleChangeShow}>
           <h1 className='filter-show-title'>SHOW ONLY</h1>
-          <input
-            type='checkbox'
-            value='all'
-            name='Filter-Show'
-            onChange={handleCheckedCheckbox}
-          />
+          <input type='checkbox' value='all' name='Filter-Show' />
           <label htmlFor='Filter-Show'>All</label>
-          <input
-            type='checkbox'
-            value='colorNone'
-            name='Filter-Show'
-            onChange={handleCheckedCheckbox}
-          />
+          <input type='checkbox' value='colorNone' name='Filter-Show' />
           <label htmlFor='Filter-Show'>Color: no color</label>
           <input type='checkbox' value='colorBlue' name='Filter-Show' />
           <label htmlFor='Filter-Show'>Color: blue</label>
