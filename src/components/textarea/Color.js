@@ -46,6 +46,13 @@ const Color = ({ setColor, setShowColor }) => {
             setShowColor(false);
           }}
         ></div>
+        <div
+          className='zero-btn'
+          onClick={() => {
+            setColor('zero-color');
+            setShowColor(false);
+          }}
+        ></div>
       </div>
     </div>
   );

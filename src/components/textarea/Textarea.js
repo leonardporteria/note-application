@@ -10,7 +10,7 @@ const Textarea = ({ onCreating, setNotes }) => {
   const [showLabel, setShowLabel] = useState(false);
 
   // COMPONENTS VARIABLES
-  const [color, setColor] = useState('no-color');
+  const [color, setColor] = useState('zero-color');
   const [label, setLabel] = useState('');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');

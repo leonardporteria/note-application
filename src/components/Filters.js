@@ -2,7 +2,7 @@ import './Filters.css';
 import { useState } from 'react';
 
 const Filters = ({ onCreating, notes, setNotes }) => {
-  const [filteredNotes, setFilteredNotes] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState(notes);
   const [filterSort, setFilterSort] = useState('date');
   const [filterShow, setFilterShow] = useState(['all']);
   const [isAllChecked, setIsAllChecked] = useState(true);
@@ -21,19 +21,39 @@ const Filters = ({ onCreating, notes, setNotes }) => {
   };
 
   const handleChangeSort = (e) => {
-    notes.sort(dynamicSort('label', -1));
-    console.log(notes);
+    const selected = e.target.value;
     setFilterSort(e.target.value);
+
+    if (selected === 'date') {
+      setNotes(JSON.parse(localStorage.getItem('note-app')));
+    } else if (selected === 'titleAsc') {
+      notes.sort(dynamicSort('title', 1));
+    } else if (selected === 'titleDesc') {
+      notes.sort(dynamicSort('title', -1));
+    } else if (selected === 'color') {
+      notes.sort(dynamicSort('color', 1));
+    } else if (selected === 'labelAsc') {
+      notes.sort(dynamicSort('label', 1));
+    } else if (selected === 'labelDesc') {
+      notes.sort(dynamicSort('label', -1));
+    }
   };
 
   const handleChangeShow = (e) => {
     console.log(e.target.value);
     console.log(notes);
     setFilterShow(e.target.value);
+    // if e.value exist pop, else push
+  };
+
+  const handleCheckedCheckbox = (e) => {
+    console.log(e.target);
+    if (e.target.checked) console.log('chk');
   };
 
   const handleCloseFilters = () => {
     onCreating(false);
+    console.log(filterSort, filterShow);
   };
 
   return (
@@ -41,38 +61,62 @@ const Filters = ({ onCreating, notes, setNotes }) => {
       <div className='filters-container'>
         <div className='filter-sort' onChange={handleChangeSort}>
           <h1 className='filter-sort-title'>SORT BY</h1>
-          <input type='radio' value='date' name='Filter-Date' defaultChecked />
-          Date Created
-          <input type='radio' value='color' name='Filter-Color' />
-          Color
-          <input type='radio' value='labelAsc' name='Filter-LabelAsc' />
-          Label (Asc)
-          <input type='radio' value='labelDesc' name='Filter-LabelDesc' />
-          Label (Desc)
+          <input
+            type='radio'
+            value='date'
+            name='Filter-Sort'
+            defaultChecked={filterSort === 'date'}
+          />
+          <label htmlFor='Filter-Sort'> Date Created</label>
+          <input
+            type='radio'
+            value='titleAsc'
+            name='Filter-Sort'
+            defaultChecked={filterSort === 'titleAsc'}
+          />
+          <label htmlFor='Filter-Sort'> Title (Asc)</label>
+          <input type='radio' value='titleDesc' name='Filter-Sort' />
+          <label htmlFor='Filter-Sort'> Title (Desc)</label>
+          <input type='radio' value='color' name='Filter-Sort' />
+          <label htmlFor='Filter-Sort'>Color</label>
+          <input type='radio' value='labelAsc' name='Filter-Sort' />
+          <label htmlFor='Filter-Sort'>Label (Asc)</label>
+          <input type='radio' value='labelDesc' name='Filter-Sort' />
+          <label htmlFor='Filter-Sort'>Label (Desc)</label>
         </div>
 
         <div className='filter-show' onChange={handleChangeShow}>
           <h1 className='filter-show-title'>SHOW ONLY</h1>
-          <input type='checkbox' value='all' name='Show-All' defaultChecked />
-          All
-          <input type='checkbox' value='colorNone' name='Show-NoColor' />
-          Color: no color
-          <input type='checkbox' value='colorBlue' name='Show-Blue' />
-          Color: blue
-          <input type='checkbox' value='colorYellow' name='Show-Yellow' />
-          Color: yellow
-          <input type='checkbox' value='colorPink' name='Show-Pink' />
-          Color: pink
-          <input type='checkbox' value='colorGreen' name='Show-Green' />
-          Color: green
-          <input type='checkbox' value='colorCyan' name='Show-Cyan' />
-          Color: cyan
-          <input type='checkbox' value='colorOrange' name='Show-Orange' />
-          Color: orange
-          <input type='checkbox' value='label' name='Show-Label' />
-          Labeled
-          <input type='checkbox' value='noLabel' name='Show-NoLabel' />
-          No Label
+          <input
+            type='checkbox'
+            value='all'
+            name='Filter-Show'
+            onChange={handleCheckedCheckbox}
+          />
+          <label htmlFor='Filter-Show'>All</label>
+          <input
+            type='checkbox'
+            value='colorNone'
+            name='Filter-Show'
+            onChange={handleCheckedCheckbox}
+          />
+          <label htmlFor='Filter-Show'>Color: no color</label>
+          <input type='checkbox' value='colorBlue' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Color: blue</label>
+          <input type='checkbox' value='colorYellow' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Color: yellow</label>
+          <input type='checkbox' value='colorPink' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Color: pink</label>
+          <input type='checkbox' value='colorGreen' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Color: green</label>
+          <input type='checkbox' value='colorCyan' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Color: cyan</label>
+          <input type='checkbox' value='colorOrange' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Color: orange</label>
+          <input type='checkbox' value='label' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>Labeled</label>
+          <input type='checkbox' value='noLabel' name='Filter-Show' />
+          <label htmlFor='Filter-Show'>No Label</label>
         </div>
 
         <div className='filters-close' onClick={handleCloseFilters}>

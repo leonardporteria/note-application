@@ -64,3 +64,10 @@
 .Color .buttons .orange-btn:hover {
   box-shadow: 1px 2px 5px 3px var(--orange-opaque);
 }
+
+.Color .buttons .zero-btn {
+  background-color: var(--dark-gray-2);
+}
+.Color .buttons .zero-btn:hover {
+  box-shadow: 1px 2px 5px 3px var(--dark-opaque);
+}
