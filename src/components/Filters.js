@@ -1,5 +1,6 @@
 import './Filters.css';
 import { useState } from 'react';
+import Checkbox from './Checkbox';
 
 const Filters = ({
   onCreating,
@@ -7,11 +8,12 @@ const Filters = ({
   setNotes,
   filterSort,
   setFilterSort,
-  filterShow,
-  setFilterShow,
+  checkboxes,
+  setCheckboxes,
 }) => {
   const [filteredNotes, setFilteredNotes] = useState(notes);
 
+  // SORT
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   const dynamicSort = (property, sortOrder) => {
     if (property[0] === '-') {
@@ -58,30 +60,30 @@ const Filters = ({
     }
   };
 
+  // SHOW
   const handleChangeShow = (e) => {
     // check if all is checked, if checked, pop, else clear others
     // if e.value exist pop, else push
-    const selected = e.target.value;
-    let oldFilterArray = filterShow;
-
-    if (selected === 'all') {
-      filterShow.includes('all')
-        ? console.log('has all')
-        : (filterShow = ['all']);
-    } else {
-      removeArray(filterShow, 'all');
-      console.log(filterShow);
-    }
-
-    filterShow.push('test');
-    console.log(filterShow);
-    console.log(filterShow);
   };
 
+  const handleChange = (e, index) => {
+    const currentObj = checkboxes[index];
+    const currState = currentObj.checked;
+    console.log(checkboxes);
+
+    for (const checkbox of checkboxes) {
+      if (checkbox.id === index) {
+        checkbox.checked = !currState;
+
+        break;
+      }
+    }
+  };
+
+  // CLOSE FILTER
   const handleCloseFilters = () => {
     onCreating(false);
   };
-
   return (
     <div className='Filters'>
       <div className='filters-container'>
@@ -133,26 +135,20 @@ const Filters = ({
 
         <div className='filter-show' onChange={handleChangeShow}>
           <h1 className='filter-show-title'>SHOW ONLY</h1>
-          <input type='checkbox' value='all' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>All</label>
-          <input type='checkbox' value='colorNone' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: no color</label>
-          <input type='checkbox' value='colorBlue' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: blue</label>
-          <input type='checkbox' value='colorYellow' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: yellow</label>
-          <input type='checkbox' value='colorPink' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: pink</label>
-          <input type='checkbox' value='colorGreen' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: green</label>
-          <input type='checkbox' value='colorCyan' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: cyan</label>
-          <input type='checkbox' value='colorOrange' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Color: orange</label>
-          <input type='checkbox' value='label' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>Labeled</label>
-          <input type='checkbox' value='noLabel' name='Filter-Show' />
-          <label htmlFor='Filter-Show'>No Label</label>
+          {
+            // https://medium.com/@wlodarczyk_j/handling-multiple-checkboxes-in-react-js-337863fd284e
+            checkboxes.map((item, index) => (
+              <Checkbox
+                key={item.key}
+                label={item.name}
+                value={item.value}
+                checked={item.checked}
+                onChange={(e) => {
+                  handleChange(e, index);
+                }}
+              />
+            ))
+          }
         </div>
 
         <div className='filters-close' onClick={handleCloseFilters}>
