@@ -8,10 +8,11 @@ const Filters = ({
   setNotes,
   filterSort,
   setFilterSort,
+  filterShow,
+  setFilterShow,
   checkboxes,
-  setCheckboxes,
 }) => {
-  const [filteredNotes, setFilteredNotes] = useState(notes);
+  const [showWarning, setShowWarning] = useState(false);
 
   // SORT
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
@@ -26,20 +27,6 @@ const Filters = ({
       return result * sortOrder;
     };
   };
-  //https://stackoverflow.com/questions/3954438/how-to-remove-item-from-array-by-value
-  function removeArray(arr) {
-    let what,
-      a = arguments,
-      L = a.length,
-      ax;
-    while (L > 1 && arr.length) {
-      what = a[--L];
-      while ((ax = arr.indexOf(what)) !== -1) {
-        arr.splice(ax, 1);
-      }
-    }
-    return arr;
-  }
 
   const handleChangeSort = (e) => {
     const selected = e.target.value;
@@ -67,14 +54,24 @@ const Filters = ({
   };
 
   const handleChange = (e, index) => {
+    let hasChecks = false;
+    if (index === 0) {
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.id >= 1 && checkbox.checked === true) hasChecks = true;
+      });
+    } else setShowWarning(false);
+
+    if (hasChecks) {
+      setShowWarning(true);
+      return;
+    }
+
     const currentObj = checkboxes[index];
     const currState = currentObj.checked;
-    console.log(checkboxes);
 
     for (const checkbox of checkboxes) {
       if (checkbox.id === index) {
         checkbox.checked = !currState;
-
         break;
       }
     }
@@ -134,7 +131,11 @@ const Filters = ({
         </div>
 
         <div className='filter-show' onChange={handleChangeShow}>
-          <h1 className='filter-show-title'>SHOW ONLY</h1>
+          <h1 className='filter-show-title'>
+            SHOW ONLY
+            {showWarning &&
+              ' Cannot enable "All" while other options are active'}
+          </h1>
           {
             // https://medium.com/@wlodarczyk_j/handling-multiple-checkboxes-in-react-js-337863fd284e
             checkboxes.map((item, index) => (

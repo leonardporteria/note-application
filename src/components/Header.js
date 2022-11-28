@@ -14,6 +14,7 @@ const Header = () => {
 
   // FILTERS CHANGES MEMORY
   const [filterSort, setFilterSort] = useState('date');
+  const [filterShow, setFilterShow] = useState(['all']);
   const [checkboxes, setCheckboxes] = useState([
     {
       id: 0,
@@ -120,6 +121,8 @@ const Header = () => {
           setNotes={setNotes}
           filterSort={filterSort}
           setFilterSort={setFilterSort}
+          filterShow={filterShow}
+          setFilterShow={setFilterShow}
           checkboxes={checkboxes}
           setCheckboxes={setCheckboxes}
         />
