@@ -1,5 +1,4 @@
 import './Filters.css';
-import { useState } from 'react';
 import Checkbox from './Checkbox';
 
 const Filters = ({
@@ -12,8 +11,6 @@ const Filters = ({
   setFilterShow,
   checkboxes,
 }) => {
-  const [showWarning, setShowWarning] = useState(false);
-
   // SORT
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   const dynamicSort = (property, sortOrder) => {
@@ -48,24 +45,8 @@ const Filters = ({
   };
 
   // SHOW
-  const handleChangeShow = (e) => {
-    // check if all is checked, if checked, pop, else clear others
-    // if e.value exist pop, else push
-  };
-
   const handleChange = (e, index) => {
-    let hasChecks = false;
-    if (index === 0) {
-      checkboxes.forEach((checkbox) => {
-        if (checkbox.id >= 1 && checkbox.checked === true) hasChecks = true;
-      });
-    } else setShowWarning(false);
-
-    if (hasChecks) {
-      setShowWarning(true);
-      return;
-    }
-
+    // change state of checked checkboxes
     const currentObj = checkboxes[index];
     const currState = currentObj.checked;
 
@@ -75,12 +56,28 @@ const Filters = ({
         break;
       }
     }
+
+    // get filtered checked checkboxes
+    const activeShow = checkboxes.filter(
+      (checkbox) => checkbox.checked === true
+    );
+
+    // break if no checkbox is selected
+    if (activeShow.length === 0) {
+      setFilterShow(['all']);
+      return;
+    }
+
+    // get values and store to state array
+    setFilterShow(activeShow.map((filter) => filter.value));
   };
 
   // CLOSE FILTER
   const handleCloseFilters = () => {
     onCreating(false);
+    console.log(filterShow);
   };
+
   return (
     <div className='Filters'>
       <div className='filters-container'>
@@ -130,12 +127,8 @@ const Filters = ({
           <label htmlFor='Filter-Sort'>Label (Desc)</label>
         </div>
 
-        <div className='filter-show' onChange={handleChangeShow}>
-          <h1 className='filter-show-title'>
-            SHOW ONLY
-            {showWarning &&
-              ' Cannot enable "All" while other options are active'}
-          </h1>
+        <div className='filter-show'>
+          <h1 className='filter-show-title'>SHOW ONLY</h1>
           {
             // https://medium.com/@wlodarczyk_j/handling-multiple-checkboxes-in-react-js-337863fd284e
             checkboxes.map((item, index) => (
