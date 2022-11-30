@@ -1,5 +1,6 @@
 import './Filters.css';
 import Checkbox from './Checkbox';
+import { useEffect, useCallback } from 'react';
 
 const Filters = ({
   onCreating,
@@ -107,11 +108,58 @@ const Filters = ({
   // CLOSE FILTER
   const handleCloseFilters = () => {
     onCreating(false);
+    console.log(filterSort);
     console.log(filterShow);
-    console.log(checkboxes);
+    console.log(notes);
   };
 
   // FILTER NOTES
+  const filterNotes = useCallback(() => {
+    console.log('useeffect ran');
+    let newNotes = [];
+    console.log(newNotes);
+    console.log(filterSort);
+    console.log(filterShow);
+    console.log(notes);
+
+    // PUSH TO newNotes THE NEW NOTES
+    if (filterShow.includes('all')) {
+      newNotes.push(...notes.filter((note) => note.color === 'all'));
+    }
+    if (filterShow.includes('colorNone')) {
+      newNotes.push(...notes.filter((note) => note.color === 'zero-color'));
+    }
+    if (filterShow.includes('colorBlue')) {
+      newNotes.push(...notes.filter((note) => note.color === 'blue'));
+    }
+    if (filterShow.includes('colorYellow')) {
+      newNotes.push(...notes.filter((note) => note.color === 'yellow'));
+    }
+    if (filterShow.includes('colorPink')) {
+      newNotes.push(...notes.filter((note) => note.color === 'pink'));
+    }
+    if (filterShow.includes('colorGreen')) {
+      newNotes.push(...notes.filter((note) => note.color === 'green'));
+    }
+    if (filterShow.includes('colorCyan')) {
+      newNotes.push(...notes.filter((note) => note.color === 'cyan'));
+    }
+    if (filterShow.includes('colorOrange')) {
+      newNotes.push(...notes.filter((note) => note.color === 'orange'));
+    }
+    if (filterShow.includes('label')) {
+      newNotes.push(...notes.filter((note) => note.label.length !== 0));
+    }
+    if (filterShow.includes('noLabel')) {
+      newNotes.push(...notes.filter((note) => note.label.length === 0));
+    }
+
+    console.log(newNotes);
+  }, [notes, filterSort, filterShow]);
+
+  useEffect(() => {
+    filterNotes();
+  }, [filterNotes]);
 
   return (
     <div className='Filters'>

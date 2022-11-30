@@ -4,7 +4,7 @@ const NoteBlock = ({ note, index }) => {
   return (
     <div className={`Note note-${index}`}>
       <div className='note-title'>
-        {note.title.lenght <= 10
+        {note.title.length <= 10
           ? `${note.title}`
           : `${note.title.slice(0, 9)}...`}
       </div>
