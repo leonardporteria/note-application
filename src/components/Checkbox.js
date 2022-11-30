@@ -8,7 +8,6 @@ const Checkbox = ({
 }) => {
   return (
     <>
-      <label htmlFor={name}>{label}</label>
       <input
         type={type}
         value={value}
@@ -16,6 +15,7 @@ const Checkbox = ({
         defaultChecked={checked}
         onChange={onChange}
       />
+      <label htmlFor={name}>{label}</label>
     </>
   );
 };

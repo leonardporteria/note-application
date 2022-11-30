@@ -10,6 +10,7 @@ const Filters = ({
   filterShow,
   setFilterShow,
   checkboxes,
+  setCheckboxes,
 }) => {
   // SORT
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
@@ -46,6 +47,38 @@ const Filters = ({
 
   // SHOW
   const handleChange = (e, index) => {
+    // IF ALL IS SELECTED
+    if (index === 0) {
+      // if all is checked
+      if (checkboxes[0].checked) {
+        // set all checkbox to false
+        for (const checkbox of checkboxes) {
+          if (checkbox.id !== 0) {
+            checkbox.checked = false;
+            break;
+          }
+        }
+
+        const activeShow = checkboxes.filter((checkbox) => checkbox.id !== 0);
+        const newCheckbox = [
+          {
+            id: 0,
+            name: 'All',
+            key: 'checkBox1',
+            value: 'all',
+            checked: true,
+          },
+          ...activeShow,
+        ];
+        console.log(newCheckbox);
+        setCheckboxes(newCheckbox);
+      }
+
+      // update checkbox state to rerender
+      //setCheckboxes(['none']);
+    }
+
+    // UPDATE STATE OF CHECKBOX
     // change state of checked checkboxes
     const currentObj = checkboxes[index];
     const currState = currentObj.checked;
@@ -57,17 +90,17 @@ const Filters = ({
       }
     }
 
+    // IF NO SELECTED VALUE
     // get filtered checked checkboxes
     const activeShow = checkboxes.filter(
       (checkbox) => checkbox.checked === true
     );
-
     // break if no checkbox is selected
     if (activeShow.length === 0) {
+      checkboxes[0].checked = true;
       setFilterShow(['all']);
       return;
     }
-
     // get values and store to state array
     setFilterShow(activeShow.map((filter) => filter.value));
   };
@@ -83,69 +116,73 @@ const Filters = ({
       <div className='filters-container'>
         <div className='filter-sort' onChange={handleChangeSort}>
           <h1 className='filter-sort-title'>SORT BY</h1>
-          <input
-            type='radio'
-            value='date'
-            name='Filter-Sort'
-            defaultChecked={filterSort === 'date'}
-          />
-          <label htmlFor='Filter-Sort'> Date Created</label>
-          <input
-            type='radio'
-            value='titleAsc'
-            name='Filter-Sort'
-            defaultChecked={filterSort === 'titleAsc'}
-          />
-          <label htmlFor='Filter-Sort'> Title (Asc)</label>
-          <input
-            type='radio'
-            value='titleDesc'
-            name='Filter-Sort'
-            defaultChecked={filterSort === 'titleDesc'}
-          />
-          <label htmlFor='Filter-Sort'> Title (Desc)</label>
-          <input
-            type='radio'
-            value='color'
-            name='Filter-Sort'
-            defaultChecked={filterSort === 'color'}
-          />
-          <label htmlFor='Filter-Sort'>Color</label>
-          <input
-            type='radio'
-            value='labelAsc'
-            name='Filter-Sort'
-            defaultChecked={filterSort === 'labelAsc'}
-          />
-          <label htmlFor='Filter-Sort'>Label (Asc)</label>
-          <input
-            type='radio'
-            value='labelDesc'
-            name='Filter-Sort'
-            defaultChecked={filterSort === 'labelDesc'}
-          />
-          <label htmlFor='Filter-Sort'>Label (Desc)</label>
+          <div className='filter-sort-container'>
+            <input
+              type='radio'
+              value='date'
+              name='Filter-Sort'
+              defaultChecked={filterSort === 'date'}
+            />
+            <label htmlFor='Filter-Sort'> Date Created</label>
+            <input
+              type='radio'
+              value='titleAsc'
+              name='Filter-Sort'
+              defaultChecked={filterSort === 'titleAsc'}
+            />
+            <label htmlFor='Filter-Sort'> Title (Asc)</label>
+            <input
+              type='radio'
+              value='titleDesc'
+              name='Filter-Sort'
+              defaultChecked={filterSort === 'titleDesc'}
+            />
+            <label htmlFor='Filter-Sort'> Title (Desc)</label>
+            <input
+              type='radio'
+              value='color'
+              name='Filter-Sort'
+              defaultChecked={filterSort === 'color'}
+            />
+            <label htmlFor='Filter-Sort'>Color</label>
+            <input
+              type='radio'
+              value='labelAsc'
+              name='Filter-Sort'
+              defaultChecked={filterSort === 'labelAsc'}
+            />
+            <label htmlFor='Filter-Sort'>Label (Asc)</label>
+            <input
+              type='radio'
+              value='labelDesc'
+              name='Filter-Sort'
+              defaultChecked={filterSort === 'labelDesc'}
+            />
+            <label htmlFor='Filter-Sort'>Label (Desc)</label>
+          </div>
         </div>
 
         <div className='filter-show'>
-          <h1 className='filter-show-title'>SHOW ONLY</h1>
-          {
-            // https://medium.com/@wlodarczyk_j/handling-multiple-checkboxes-in-react-js-337863fd284e
-            checkboxes.map((item, index) => (
-              <Checkbox
-                key={item.key}
-                label={item.name}
-                value={item.value}
-                checked={item.checked}
-                onChange={(e) => {
-                  handleChange(e, index);
-                }}
-              />
-            ))
-          }
+          <h1 className='filter-show-title'>SHOW</h1>
+          <div className='filter-show-container'>
+            {
+              // https://medium.com/@wlodarczyk_j/handling-multiple-checkboxes-in-react-js-337863fd284e
+              checkboxes.map((item, index) => (
+                <Checkbox
+                  key={item.key}
+                  label={item.name}
+                  value={item.value}
+                  checked={item.checked}
+                  onChange={(e) => {
+                    handleChange(e, index);
+                  }}
+                />
+              ))
+            }
+          </div>
         </div>
 
-        <div className='filters-close' onClick={handleCloseFilters}>
+        <div className='filter-close' onClick={handleCloseFilters}>
           <h1>close</h1>
         </div>
       </div>
