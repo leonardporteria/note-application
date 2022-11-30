@@ -109,6 +109,9 @@
   border-radius: 0.5rem;
   background-color: var(--red-p);
 }
+.Filters .filters-container .filter-close:hover {
+  box-shadow: 1px 2px 5px 3px var(--red-opaque);
+}
 .Filters .filters-container .filter-close > h1 {
   font-family: var(--poppins);
   font-size: 1rem;

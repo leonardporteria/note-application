@@ -12,7 +12,7 @@ const Filters = ({
   checkboxes,
   setCheckboxes,
 }) => {
-  // SORT
+  // SORT FILTER
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   const dynamicSort = (property, sortOrder) => {
     if (property[0] === '-') {
@@ -45,39 +45,8 @@ const Filters = ({
     }
   };
 
-  // SHOW
+  // SHOW FILTER
   const handleChange = (e, index) => {
-    // IF ALL IS SELECTED
-    if (index === 0) {
-      // if all is checked
-      if (checkboxes[0].checked) {
-        // set all checkbox to false
-        for (const checkbox of checkboxes) {
-          if (checkbox.id !== 0) {
-            checkbox.checked = false;
-            break;
-          }
-        }
-
-        const activeShow = checkboxes.filter((checkbox) => checkbox.id !== 0);
-        const newCheckbox = [
-          {
-            id: 0,
-            name: 'All',
-            key: 'checkBox1',
-            value: 'all',
-            checked: true,
-          },
-          ...activeShow,
-        ];
-        console.log(newCheckbox);
-        setCheckboxes(newCheckbox);
-      }
-
-      // update checkbox state to rerender
-      //setCheckboxes(['none']);
-    }
-
     // UPDATE STATE OF CHECKBOX
     // change state of checked checkboxes
     const currentObj = checkboxes[index];
@@ -90,26 +59,59 @@ const Filters = ({
       }
     }
 
+    // IF ALL IS SELECTED AND ALL IS CHECKED
+    if (index === 0 && checkboxes[0].checked === true) {
+      // set all checkbox to false
+      for (const checkbox of checkboxes) {
+        if (checkbox.id !== 0) {
+          checkbox.checked = false;
+        }
+      }
+
+      const activeShow = checkboxes.filter((checkbox) => checkbox.id !== 0);
+      const newCheckbox = [
+        {
+          id: 0,
+          name: 'All',
+          key: 'checkBox1',
+          value: 'all',
+          checked: true,
+        },
+        ...activeShow,
+      ];
+      console.log(newCheckbox);
+      setCheckboxes(newCheckbox);
+    }
+
+    // IF NOT ALL IS SELECTED AND ALL IS CHECKED
+    if (index !== 0 && checkboxes[0].checked === true) {
+      checkboxes[0].checked = false;
+      setCheckboxes(checkboxes);
+    }
+
     // IF NO SELECTED VALUE
     // get filtered checked checkboxes
     const activeShow = checkboxes.filter(
       (checkbox) => checkbox.checked === true
     );
-    // break if no checkbox is selected
     if (activeShow.length === 0) {
       checkboxes[0].checked = true;
       setFilterShow(['all']);
       return;
+    } else {
+      // get values and store to state array
+      setFilterShow(activeShow.map((filter) => filter.value));
     }
-    // get values and store to state array
-    setFilterShow(activeShow.map((filter) => filter.value));
   };
 
   // CLOSE FILTER
   const handleCloseFilters = () => {
     onCreating(false);
     console.log(filterShow);
+    console.log(checkboxes);
   };
+
+  // FILTER NOTES
 
   return (
     <div className='Filters'>
