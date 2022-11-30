@@ -6,11 +6,10 @@ import Filters from './Filters';
 import { useState } from 'react';
 
 const Header = () => {
+  const localStorageObject = JSON.parse(localStorage.getItem('note-app'));
   const [showTextbox, setshowTextbox] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
-  const [notes, setNotes] = useState(
-    JSON.parse(localStorage.getItem('note-app')) || []
-  );
+  const [notes, setNotes] = useState(localStorageObject || []);
 
   // FILTERS CHANGES MEMORY
   const [filterSort, setFilterSort] = useState('date');
@@ -117,6 +116,7 @@ const Header = () => {
       {showFilters && (
         <Filters
           onCreating={setShowFilters}
+          localStorageObject={localStorageObject}
           notes={notes}
           setNotes={setNotes}
           filterSort={filterSort}

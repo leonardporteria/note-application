@@ -1,9 +1,10 @@
 import './Filters.css';
 import Checkbox from './Checkbox';
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const Filters = ({
   onCreating,
+  localStorageObject,
   notes,
   setNotes,
   filterSort,
@@ -13,6 +14,8 @@ const Filters = ({
   checkboxes,
   setCheckboxes,
 }) => {
+  const [filteredNotes, setFilteredNotes] = useState([]);
+
   // SORT FILTER
   // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
   const dynamicSort = (property, sortOrder) => {
@@ -32,7 +35,7 @@ const Filters = ({
     setFilterSort(e.target.value);
 
     if (selected === 'date') {
-      setNotes(JSON.parse(localStorage.getItem('note-app')));
+      setNotes(filteredNotes);
     } else if (selected === 'titleAsc') {
       notes.sort(dynamicSort('title', 1));
     } else if (selected === 'titleDesc') {
@@ -47,7 +50,7 @@ const Filters = ({
   };
 
   // SHOW FILTER
-  const handleChange = (e, index) => {
+  const handleChangeShow = (e, index) => {
     // UPDATE STATE OF CHECKBOX
     // change state of checked checkboxes
     const currentObj = checkboxes[index];
@@ -110,51 +113,67 @@ const Filters = ({
     onCreating(false);
     console.log(filterSort);
     console.log(filterShow);
-    console.log(notes);
+    console.log(filteredNotes);
+
+    setNotes(filteredNotes);
   };
 
   // FILTER NOTES
   const filterNotes = useCallback(() => {
     console.log('useeffect ran');
     let newNotes = [];
-    console.log(newNotes);
-    console.log(filterSort);
-    console.log(filterShow);
-    console.log(notes);
 
     // PUSH TO newNotes THE NEW NOTES
     if (filterShow.includes('all')) {
-      newNotes.push(...notes.filter((note) => note.color === 'all'));
+      newNotes.push(...localStorageObject);
     }
     if (filterShow.includes('colorNone')) {
-      newNotes.push(...notes.filter((note) => note.color === 'zero-color'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'zero-color')
+      );
     }
     if (filterShow.includes('colorBlue')) {
-      newNotes.push(...notes.filter((note) => note.color === 'blue'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'blue')
+      );
     }
     if (filterShow.includes('colorYellow')) {
-      newNotes.push(...notes.filter((note) => note.color === 'yellow'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'yellow')
+      );
     }
     if (filterShow.includes('colorPink')) {
-      newNotes.push(...notes.filter((note) => note.color === 'pink'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'pink')
+      );
     }
     if (filterShow.includes('colorGreen')) {
-      newNotes.push(...notes.filter((note) => note.color === 'green'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'green')
+      );
     }
     if (filterShow.includes('colorCyan')) {
-      newNotes.push(...notes.filter((note) => note.color === 'cyan'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'cyan')
+      );
     }
     if (filterShow.includes('colorOrange')) {
-      newNotes.push(...notes.filter((note) => note.color === 'orange'));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.color === 'orange')
+      );
     }
     if (filterShow.includes('label')) {
-      newNotes.push(...notes.filter((note) => note.label.length !== 0));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.label.length !== 0)
+      );
     }
     if (filterShow.includes('noLabel')) {
-      newNotes.push(...notes.filter((note) => note.label.length === 0));
+      newNotes.push(
+        ...localStorageObject.filter((note) => note.label.length === 0)
+      );
     }
 
-    console.log(newNotes);
+    setFilteredNotes(newNotes);
   }, [notes, filterSort, filterShow]);
 
   useEffect(() => {
@@ -224,7 +243,7 @@ const Filters = ({
                   value={item.value}
                   checked={item.checked}
                   onChange={(e) => {
-                    handleChange(e, index);
+                    handleChangeShow(e, index);
                   }}
                 />
               ))
