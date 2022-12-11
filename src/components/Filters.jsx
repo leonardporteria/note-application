@@ -174,7 +174,7 @@ const Filters = ({
     }
 
     setFilteredNotes(newNotes);
-  }, [notes, filterSort, filterShow]);
+  }, [filterShow, localStorageObject]);
 
   useEffect(() => {
     filterNotes();
