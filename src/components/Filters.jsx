@@ -37,15 +37,15 @@ const Filters = ({
     if (selected === 'date') {
       setNotes(filteredNotes);
     } else if (selected === 'titleAsc') {
-      notes.sort(dynamicSort('title', 1));
+      setNotes(notes.sort(dynamicSort('title', 1)));
     } else if (selected === 'titleDesc') {
-      notes.sort(dynamicSort('title', -1));
+      setNotes(notes.sort(dynamicSort('title', -1)));
     } else if (selected === 'color') {
-      notes.sort(dynamicSort('color', 1));
+      setNotes(notes.sort(dynamicSort('color', 1)));
     } else if (selected === 'labelAsc') {
-      notes.sort(dynamicSort('label', 1));
+      setNotes(notes.sort(dynamicSort('label', 1)));
     } else if (selected === 'labelDesc') {
-      notes.sort(dynamicSort('label', -1));
+      setNotes(notes.sort(dynamicSort('label', -1)));
     }
   };
 
@@ -114,8 +114,6 @@ const Filters = ({
     console.log(filterSort);
     console.log(filterShow);
     console.log(filteredNotes);
-
-    setNotes(filteredNotes);
   };
 
   // FILTER NOTES
