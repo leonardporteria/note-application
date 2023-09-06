@@ -1,4 +1,4 @@
-import './Textarea.css';
+import './Textarea.scss';
 import Color from './Color';
 import Label from './Label';
 

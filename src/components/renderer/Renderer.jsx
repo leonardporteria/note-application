@@ -1,4 +1,4 @@
-import './Renderer.css';
+import './Renderer.scss';
 import NoteBlock from './NoteBlock';
 
 const Renderer = ({ notes, setNotes }) => {

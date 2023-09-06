@@ -1,4 +1,4 @@
-import './Header.css';
+import './Header.scss';
 import Textarea from './textarea/Textarea';
 import Renderer from './renderer/Renderer';
 import Filters from './Filters';

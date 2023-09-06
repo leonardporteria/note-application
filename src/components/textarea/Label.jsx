@@ -1,4 +1,4 @@
-import './Label.css';
+import './Label.scss';
 import { useState } from 'react';
 
 const Label = ({ setLabel, label, setShowLabel }) => {

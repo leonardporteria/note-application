@@ -1,4 +1,4 @@
-import './Filters.css';
+import './Filters.scss';
 import Checkbox from './Checkbox';
 import { useState, useEffect, useCallback } from 'react';
 

@@ -1,4 +1,4 @@
-import './NoteBlock.css';
+import './NoteBlock.scss';
 
 const NoteBlock = ({ note, index }) => {
   return (

@@ -1,4 +1,4 @@
-import './Color.css';
+import './Color.scss';
 
 const Color = ({ setColor, setShowColor }) => {
   return (
